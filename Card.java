@@ -29,4 +29,9 @@ public String getranknsuits()
 
     return rank + "of " + suit;
 }
+
+public String toString()
+{
+    return getranknsuits();
+}
 }
