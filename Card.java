@@ -12,21 +12,21 @@ public String getranknsuits()
 {
     if(rank == 1)
     {
-        return "Ace of ";
+        return "Ace of " + suit;
     }
     else if(rank == 11)
     {
-        return "Jack of ";
+        return "Jack of " + suit;
     }
     else if(rank == 12)
     {
-        return "Queen of ";
+        return "Queen of " + suit;
     }
     else if(rank == 13)
     {
-        return "King of ";
+        return "King of " + suit;
     }
 
-    return rank + "of ";
+    return rank + "of " + suit;
 }
 }
