@@ -8,11 +8,25 @@ rank = r;
 suit = s;
 }
 
-public String getrank()
+public String getranknsuits()
 {
     if(rank == 1)
     {
-        return "Ace";
+        return "Ace of ";
     }
+    else if(rank == 11)
+    {
+        return "Jack of ";
+    }
+    else if(rank == 12)
+    {
+        return "Queen of ";
+    }
+    else if(rank == 13)
+    {
+        return "King of ";
+    }
+
+    return rank + "of ";
 }
 }
