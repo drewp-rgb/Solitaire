@@ -15,9 +15,9 @@ public class main {
         ArrayList<Card> Foundation4 = new ArrayList<>();
 
         ArrayList<ArrayList<Card>> board = new ArrayList<ArrayList<Card>>();
-        
 
-        //deck init ----------------------------------------------------------------------------
+        // deck init
+        // ----------------------------------------------------------------------------
         while (deck.size() < 52) {
             String[] suits = { "Hearts", "Diamonds", "Spades", "Clubs" };
 
@@ -33,52 +33,48 @@ public class main {
             }
 
         }
-        // deck init ----------------------------------------------------------------------------
+        // deck init
+        // ----------------------------------------------------------------------------
 
-        //tableau -------------------------------------------------------------------------------
-        for(int lcv = 0; lcv < 7; lcv++)
-        {
+        // tableau
+        // -------------------------------------------------------------------------------
+        for (int lcv = 0; lcv < 7; lcv++) {
             ArrayList<Card> y = new ArrayList<>();
             board.add(y);
         }
-        
-        for(int lcv = 0;lcv < 7; lcv ++)
-        {
-            
-            for(int lcv2 = 0; lcv2 < lcv+1; lcv2++)
-            {
-                board.get(lcv).add(deck.get((int)(Math.random()*52)));
+
+        for (int lcv = 0; lcv < 7; lcv++) {
+
+            for (int lcv2 = 0; lcv2 < lcv + 1; lcv2++) {
+                int spot = (int) (Math.random() * deck.size() - 1);
+                board.get(lcv).add(deck.get(spot));
+                deck.remove(deck.get(spot));
             }
-            
+
         }
+        // tableau
+        // -------------------------------------------------------------------------------
+       
+
+        // pile rest of deck is the pile
         
-            
         
 
-        
-
-
-boolean gameend = false;
- while(gameend = false)
-        {
+        boolean gameend = false;
+        while (gameend = false) {
             System.out.println("what would you like to do(draw(d), move card(m))");
-            if(input.next().equals("d"))
-            {
-                System.out.println("you drew a " /*whatever*/);
-            }
-            else if(input.next().equals("m"))
-            {
+            if (input.next().equals("d")) {
+                System.out.println("you drew a " /* whatever */);
+            } else if (input.next().equals("m")) {
                 System.out.println("which pile would you like to take from");
                 int grabbed = input.nextInt();
                 System.out.println("where do you want to put it");
-                /*check it and place it there */
-            }
-            else
-            {
+                /* check it and place it there */
+            } else {
                 System.out.println("invaild command try harder");
             }
         }
-        
+
     }
 
 }

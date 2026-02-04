@@ -27,7 +27,7 @@ public String getranknsuits()
         return "King of " + suit;
     }
 
-    return rank + "of " + suit;
+    return rank + " of " + suit;
 }
 
 public String toString()
