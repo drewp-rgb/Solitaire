@@ -74,7 +74,7 @@ public class main {
                 System.out.println("invalid command try harder");
             }
         }
-        System.out.println("test");
+      
     }
 
 }
