@@ -71,10 +71,10 @@ public class main {
                 System.out.println("where do you want to put it");
                 /* check it and place it there */
             } else {
-                System.out.println("invaild command try harder");
+                System.out.println("invalid command try harder");
             }
         }
-
+        System.out.println("test");
     }
 
 }
