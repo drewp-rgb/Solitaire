@@ -38,19 +38,22 @@ public class main {
 
         // tableau
         // -------------------------------------------------------------------------------
-        for (int lcv = 0; lcv < 7; lcv++) {
+        for (int lcv = 0; lcv < 7; lcv++)
+        {
             ArrayList<Card> y = new ArrayList<>();
             board.add(y);
         }
 
-        for (int lcv = 0; lcv < 7; lcv++) {
+        for (int lcv = 0; lcv < 7; lcv++)
+        {
 
-            for (int lcv2 = 0; lcv2 < lcv + 1; lcv2++) {
+            for (int lcv2 = 0; lcv2 < lcv + 1; lcv2++)
+            {
                 int spot = (int) (Math.random() * deck.size() - 1);
                 board.get(lcv).add(deck.get(spot));
                 deck.remove(deck.get(spot));
             }
-
+            board.get(lcv).get(board.get(lcv).size() - 1).showcard();
         }
         // tableau
         // -------------------------------------------------------------------------------
@@ -62,6 +65,24 @@ public class main {
 
         boolean gameend = false;
         while (gameend = false) {
+            System.out.println("the current tables");
+            for(int lcv = 0; lcv <= 19; ++lcv)
+            {
+                for(int lcv2 = 0; lcv2 < board.size(); ++lcv2)
+                {
+                    if(lcv<board.get(lcv2).size())
+                    {
+                        if(board.get(lcv2).get(lcv).getsight() == true)
+                        {
+                            System.out.println(board.get(lcv2).get(lcv).getranknsuits());
+                        }
+                        else
+                        {
+                            System.out.println("?");
+                        }
+                    }
+                }
+            }
             System.out.println("what would you like to do(draw(d), move card(m))");
             if (input.next().equals("d")) {
                 System.out.println("you drew a " /* whatever */);
