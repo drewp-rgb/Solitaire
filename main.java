@@ -61,7 +61,8 @@ public class main {
         
 
         boolean gameend = false;
-        while (gameend = false) {
+        while(gameend == false)
+        {
             System.out.println("what would you like to do(draw(d), move card(m))");
             if (input.next().equals("d")) {
                 System.out.println("you drew a " /* whatever */);
@@ -73,7 +74,7 @@ public class main {
             } else {
                 System.out.println("invalid command try harder");
             }
-        }
+        } 
       
     }
 
