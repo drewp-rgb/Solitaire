@@ -61,20 +61,25 @@ public class main {
         
 
         boolean gameend = false;
-        while (gameend = false) {
+        while (gameend == false)
+        {
             System.out.println("what would you like to do(draw(d), move card(m))");
-            if (input.next().equals("d")) {
+            if (input.next().equals("d"))
+            {
                 System.out.println("you drew a " /* whatever */);
-            } else if (input.next().equals("m")) {
+            }
+            else if (input.next().equals("m")) {
                 System.out.println("which pile would you like to take from");
                 int grabbed = input.nextInt();
                 System.out.println("where do you want to put it");
                 /* check it and place it there */
-            } else {
-                System.out.println("invalid command try harder");
+            } 
+            else
+            {
+                System.out.println("invaild command try harder");
             }
         }
-      
+
     }
 
 }
