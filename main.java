@@ -73,7 +73,7 @@ public class main
             System.out.println("the current tables");
             for(int lcv = 20; lcv >= 0; --lcv)
             {
-                for(int lcv2 = board.size() -1; lcv2 >= 0; --lcv2)
+                for(int lcv2 = 0; lcv < 7; ++lcv2)
                 {
                     if(lcv<board.get(lcv2).size())
                     {
@@ -83,7 +83,7 @@ public class main
                         }
                         else
                         {
-                            System.out.print("?");
+                            System.out.print("?                ");
                         }
                     }
                     System.out.print(" ");
