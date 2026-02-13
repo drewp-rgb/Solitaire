@@ -89,7 +89,7 @@ public class main
                     System.out.print(" ");
                 }
                 
-                System.out.println("");
+                System.out.println();
             }
             System.out.println("what would you like to do(draw(d), move card(m))");
             if (input.next().equals("d")) {

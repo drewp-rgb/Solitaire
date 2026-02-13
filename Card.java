@@ -8,7 +8,7 @@ public Card(int r, String s)
 {
 rank = r;
 suit = s;
-if(suit == "clubs" || suit == "spades")
+if(suit == "Clubs" || suit == "Spades")
 {
     coolair = "black";
 }
