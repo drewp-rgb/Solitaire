@@ -19,7 +19,6 @@ public class main
         ArrayList<ArrayList<Card>> board = new ArrayList<ArrayList<Card>>();
 
         // deck init
-        // ----------------------------------------------------------------------------
         while (deck.size() < 52) {
             String[] suits = { "Hearts", "Diamonds", "Spades", "Clubs" };
 
@@ -38,10 +37,9 @@ public class main
 
         }
         // deck init
-        // ----------------------------------------------------------------------------
+      
 
         // tableau
-        // -------------------------------------------------------------------------------
         for (int lcv = 0; lcv < 7; lcv++)
         {
             ArrayList<Card> y = new ArrayList<>();
@@ -61,7 +59,7 @@ public class main
             board.get(lcv).get(board.get(lcv).size() - 1).showcard();
         }
         // tableau
-        // -------------------------------------------------------------------------------
+        
        
 
         // pile rest of deck is the pile
@@ -73,7 +71,7 @@ public class main
             System.out.println("the current tables");
             for(int lcv = 20; lcv >= 0; --lcv)
             {
-                for(int lcv2 = board.size() -1; lcv2 >= 0; --lcv2)
+                for(int lcv2 = 0; lcv < 7; ++lcv2)
                 {
                     if(lcv<board.get(lcv2).size())
                     {
@@ -83,7 +81,7 @@ public class main
                         }
                         else
                         {
-                            System.out.print("?");
+                            System.out.print("?                ");
                         }
                     }
                     System.out.print(" ");
