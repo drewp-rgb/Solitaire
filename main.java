@@ -11,10 +11,13 @@ public class main
         ArrayList<Card> Stock = new ArrayList<>();
         ArrayList<Card> Waste = new ArrayList<>();
 
-        ArrayList<Card> Foundation1 = new ArrayList<>();
-        ArrayList<Card> Foundation2 = new ArrayList<>();
-        ArrayList<Card> Foundation3 = new ArrayList<>();
-        ArrayList<Card> Foundation4 = new ArrayList<>();
+        ArrayList<ArrayList<Card>> Foundations = new ArrayList<ArrayList<Card>>();
+        for(int lcv = 0;lcv<4;lcv++)
+        {
+            ArrayList<Card> y = new ArrayList<>();
+            Foundations.add(y);
+        }
+
 
         ArrayList<ArrayList<Card>> board = new ArrayList<ArrayList<Card>>();
 
@@ -91,7 +94,24 @@ public class main
             System.out.println();
            }
             
-
+           //GAME
+           System.out.println("Current foundation: ");
+           for(int lcv = 0;lcv < 4; lcv++)
+           {
+            System.out.print("Foundation " + (lcv +1) + ": ");
+            if(!Foundations.get(lcv).isEmpty())
+            {
+            for(Card x : Foundations.get(lcv))
+            {
+               System.out.print(x.getranknsuits() + "  "); 
+            }
+            }
+            else
+                {
+                    System.out.print("Empty");
+                }  
+                System.out.println();     
+           }
             System.out.println("Face up card in waste:");
             System.out.println(Waste.get(Waste.size()-1).getranknsuits());
 
@@ -160,8 +180,12 @@ public class main
                     if(grabbed2.equals("t"))
                     {
                         System.out.println("while pile(1-7)");
+                        
                         placespot = input.nextInt() - 1;
+                        if(placespot >= 0 && placespot < 7)
+                        {
 
+                        
                         //checks if pile is empty, if not check if placeable, if is check if it is a king
 
                         if(!board.get(placespot).isEmpty())
@@ -194,15 +218,96 @@ public class main
                             System.out.println("can only place kings on empty piles");
                         }
                     }   
+                }
+                else
+                {
+                    System.out.println("invalid postition");
+                    continue;
+                }
                     }
                     //PLACED IN TABLEAU
+
+                    //PLACED IN FOUNDATION
+                    else if(grabbed2.equals("f"))
+                    {
+                        System.out.println("Which foundation pile(1-4)");
+                        int fspot = input.nextInt() - 1;
+                        if(!Foundations.get(fspot).isEmpty())
+                        {
+                            if(grabbedCard.getsuit().equals(Foundations.get(fspot).get(Foundations.get(fspot).size()-1).getsuit()) &&
+                            grabbedCard.getrank() == Foundations.get(fspot).get(Foundations.get(fspot).size()-1).getrank() + 1)
+                            {
+                                Foundations.get(fspot).add(grabbedCard);
+                                board.get(pilespot).remove(board.get(pilespot).get(board.get(pilespot).size()-1));
+                                if(!board.get(pilespot).isEmpty())
+                                {
+                                board.get(pilespot).get(board.get(pilespot).size()-1).showcard();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if(grabbedCard.getrank() == 1)
+                            {
+                               Foundations.get(fspot).add(grabbedCard);
+                                board.get(pilespot).remove(board.get(pilespot).get(board.get(pilespot).size()-1));
+                                if(!board.get(pilespot).isEmpty())
+                                {
+                                board.get(pilespot).get(board.get(pilespot).size()-1).showcard();
+                                } 
+                            }
+                            else
+                            {
+                                System.out.println("can only add ace to empty foundation");
+                            }
+                        }
+                    }
+                    
                 }
                 //PULL FROM TABLEAU
 
 
                 if(grabbed.equals("w"))
                 {
+                    Card wasteCard = Waste.get(Waste.size()-1);
                     System.out.println(" place waste card on tableau(t) or foundation(f)");
+                    String wastespot = input.next();
+
+                    //PLACED WASTE ON TABLEAU
+                    if(wastespot.equals("t"))
+                    {
+                        System.out.println("which pile(1-7)");
+                        int wasteplace = input.nextInt();
+
+                        if(!board.get(wasteplace).isEmpty())
+                        {
+
+                            //checks if rank and color is correct
+                        if((wasteCard.getrank() == board.get(wasteplace).get(board.get(wasteplace).size()-1).getrank() - 1) && 
+                        wasteCard.getcolor() != board.get(wasteplace).get(board.get(wasteplace).size()-1).getcolor())
+                          {
+                            board.get(wasteplace).add(wasteCard);
+                            Waste.remove(Waste.size()-1);
+                            
+                          }
+                        else
+                          {
+                            System.out.println("cant add to pile, wrong color or rank");
+                          }
+                        }
+                        else
+                        {
+                        if(wasteCard.getrank() == 13)
+                        {
+                            board.get(wasteplace).add(wasteCard);
+                        }
+                        else
+                        {
+                            System.out.println("can only place kings on empty piles");
+                        }
+                    }   
+                            
+                    }
                 }
             } 
             //CHOSE MOVE
