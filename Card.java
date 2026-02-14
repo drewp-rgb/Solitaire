@@ -8,7 +8,7 @@ public Card(int r, String s)
 {
 rank = r;
 suit = s;
-if(suit.equals("Clubs") || suit.equals("Spades"))
+if(suit.equals("C") || suit.equals("S"))
 {
     color = "black";
 }

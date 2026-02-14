@@ -72,43 +72,35 @@ public class main
         boolean gameend = false;
         while (gameend == false) {
             System.out.println("Current board:");
-            int biggesttab = 0;
-            for(ArrayList<Card> x : board)
+
+
+           for(int lcv = 0;lcv<7;lcv++)
+           {
+            System.out.print("Pile " + (lcv+1)+": ");
+            for(Card x : board.get(lcv))
             {
-                if(x.size() > biggesttab)
+                if(x.getsight())
                 {
-                    biggesttab = x.size();
+                    System.out.print(x.getranknsuits() + "  ");
+                }
+                else
+                {
+                    System.out.print("??  ");
                 }
             }
-
-            for(int r = 0; r <biggesttab; r++)
-            {
+            System.out.println();
+           }
             
-                for(int c = 0;c <7;c++)
-                {
-                    if(r < board.get(c).size())
-                    {
-                        Card card = board.get(c).get(r);
 
-                        if(card.getsight() == true)
-                        {
-                            System.out.print(card.getranknsuits());
-                        }
-                        else
-                        {
-                            System.out.print(" ??   ");
-                        }
-                    }
-                    
-                }
-                System.out.println();
-                
-            }
-            
             System.out.println("Face up card in waste:");
             System.out.println(Waste.get(Waste.size()-1).getranknsuits());
+
+
             System.out.println("what would you like to do(draw(d), move card(m))");
             String choice = input.next();
+
+
+            //CHOSE DRAW
             if (choice.equals("d")) {
                 if(!Stock.isEmpty())
                 {
@@ -128,23 +120,94 @@ public class main
                     Stock.remove(Stock.size()-1);
                 }
                 
-            } else if (choice.equals("m")) {
+            } 
+            //CHOSE DRAW
+
+
+            //CHOSE MOVE
+            else if (choice.equals("m")) {
+
                 System.out.println("pull from tableau(t) or waste(w)");
                 String grabbed = input.next();
 
-                //if tableau is chosen
+
+                //PULL FROM TABLEAU
                 if(grabbed.equals("t"))
                 {
                     System.out.println("which pile (1-7)");
-                    int pilespot = input.nextInt();
-                    Card grabbedCard = board.get(pilespot).get(board.get(pilespot).size()-1);
-                    board.get(pilespot).remove(board.get(pilespot).get(board.get(pilespot).size()-1));
+                    int pilespot = input.nextInt() -1;
+                    int placespot = 0;
+                    Card grabbedCard = null;
+                    if(!board.get(pilespot).isEmpty())
+                    {
+
+                    
+                    grabbedCard = board.get(pilespot).get(board.get(pilespot).size()-1);
+                    }
+                    else
+                    {
+                        System.out.println("pile is empty");
+                        continue;
+                    }
+
+
                     //where to put
                     System.out.println("place in tableau(t) or foundation(f)");
+                    String grabbed2 = input.next();
+                    
 
+                    //PLACED IN TABLEAU
+                    if(grabbed2.equals("t"))
+                    {
+                        System.out.println("while pile(1-7)");
+                        placespot = input.nextInt() - 1;
+
+                        //checks if pile is empty, if not check if placeable, if is check if it is a king
+
+                        if(!board.get(placespot).isEmpty())
+                        {
+
+                            //checks if rank and color is correct
+                        if((grabbedCard.getrank() == board.get(placespot).get(board.get(placespot).size()-1).getrank() - 1) && 
+                        grabbedCard.getcolor() != board.get(placespot).get(board.get(placespot).size()-1).getcolor())
+                          {
+                            board.get(placespot).add(grabbedCard);
+                            board.get(pilespot).remove(board.get(pilespot).get(board.get(pilespot).size()-1));
+                            if(!board.get(pilespot).isEmpty())
+                            {
+                            board.get(pilespot).get(board.get(pilespot).size()-1).showcard();
+                            }
+                          }
+                        else
+                          {
+                            System.out.println("cant add to pile, wrong color or rank");
+                          }
+                        }
+                        else
+                        {
+                        if(grabbedCard.getrank() == 13)
+                        {
+                            board.get(placespot).add(grabbedCard);
+                        }
+                        else
+                        {
+                            System.out.println("can only place kings on empty piles");
+                        }
+                    }   
+                    }
+                    //PLACED IN TABLEAU
                 }
-                //if tableau is chosen
-            } else {
+                //PULL FROM TABLEAU
+
+
+                if(grabbed.equals("w"))
+                {
+                    System.out.println(" place waste card on tableau(t) or foundation(f)");
+                }
+            } 
+            //CHOSE MOVE
+
+            else {
                 System.out.println("Invalid command, try again");
             }
         }
