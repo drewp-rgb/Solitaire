@@ -106,22 +106,49 @@ public class main
             }
             
             System.out.println("Face up card in waste:");
-            {
-        
-            }
+            System.out.println(Waste.get(Waste.size()-1).getranknsuits());
             System.out.println("what would you like to do(draw(d), move card(m))");
-            if (input.next().equals("d")) {
-                System.out.println("Next waste card: " /* whatever */);
-            } else if (input.next().equals("m")) {
-                System.out.println("which pile would you like to take from? (1-7) ");
-                int grabbed = input.nextInt();
-                System.out.println("where do you want to put it? (1-7) ");
-                /* check it and place it there */
+            String choice = input.next();
+            if (choice.equals("d")) {
+                if(!Stock.isEmpty())
+                {
+                    Waste.add(Stock.get(Stock.size()-1));
+                    Stock.remove(Stock.size()-1);
+                }
+                else
+                {
+                    System.out.println("End of waste, recycling");
+                    for(int lcv = Waste.size() - 1; lcv>=0;lcv--)
+                    {
+                        Stock.add(Waste.get(lcv));
+                        
+                    }
+                    Waste.clear();
+                    Waste.add(Stock.get(Stock.size()-1));
+                    Stock.remove(Stock.size()-1);
+                }
+                
+            } else if (choice.equals("m")) {
+                System.out.println("pull from tableau(t) or waste(w)");
+                String grabbed = input.next();
+
+                //if tableau is chosen
+                if(grabbed.equals("t"))
+                {
+                    System.out.println("which pile (1-7)");
+                    int pilespot = input.nextInt();
+                    Card grabbedCard = board.get(pilespot).get(board.get(pilespot).size()-1);
+                    board.get(pilespot).remove(board.get(pilespot).get(board.get(pilespot).size()-1));
+                    //where to put
+                    System.out.println("place in tableau(t) or foundation(f)");
+
+                }
+                //if tableau is chosen
             } else {
                 System.out.println("Invalid command, try again");
             }
         }
-      //test
+      
     }
 
 }
