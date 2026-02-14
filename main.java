@@ -20,7 +20,7 @@ public class main
 
         // deck init
         while (deck.size() < 52) {
-            String[] suits = { "Hearts", "Diamonds", "Spades", "Clubs" };
+            String[] suits = { "H", "D", "C", "S" };
 
             Card x = new Card((int) (Math.random() * 13) + 1, suits[(int) (Math.random() * 4)]);
             boolean check = true;
@@ -52,7 +52,7 @@ public class main
             for (int lcv2 = 0; lcv2 < lcv + 1; lcv2++)
             {
 
-                int spot = (int) (Math.random() * deck.size() - 1);
+                int spot = (int) (Math.random() * deck.size());
                 board.get(lcv).add(deck.get(spot));
                 deck.remove(deck.get(spot));
             }
@@ -62,43 +62,63 @@ public class main
         
        
 
-        // pile rest of deck is the pile
-        
-        
+        // pile
+        Stock.addAll(deck);
+        Card initwaste = Stock.get(Stock.size()-1);
+        initwaste.showcard();
+        Stock.remove(Stock.size()-1);
+        Waste.add(initwaste);
 
         boolean gameend = false;
         while (gameend == false) {
-            System.out.println("the current tables");
-            for(int lcv = 20; lcv >= 0; --lcv)
+            System.out.println("Current board:");
+            int biggesttab = 0;
+            for(ArrayList<Card> x : board)
             {
-                for(int lcv2 = 0; lcv < 7; ++lcv2)
+                if(x.size() > biggesttab)
                 {
-                    if(lcv<board.get(lcv2).size())
+                    biggesttab = x.size();
+                }
+            }
+
+            for(int r = 0; r <biggesttab; r++)
+            {
+            
+                for(int c = 0;c <7;c++)
+                {
+                    if(r < board.get(c).size())
                     {
-                        if(board.get(lcv2).get(lcv).getsight() == true)
+                        Card card = board.get(c).get(r);
+
+                        if(card.getsight() == true)
                         {
-                            System.out.print(board.get(lcv2).get(lcv).getranknsuits());
+                            System.out.print(card.getranknsuits());
                         }
                         else
                         {
-                            System.out.print("?                ");
+                            System.out.print(" ??   ");
                         }
                     }
-                    System.out.print(" ");
+                    
                 }
-                
                 System.out.println();
+                
+            }
+            
+            System.out.println("Face up card in waste:");
+            {
+        
             }
             System.out.println("what would you like to do(draw(d), move card(m))");
             if (input.next().equals("d")) {
-                System.out.println("you drew a " /* whatever */);
+                System.out.println("Next waste card: " /* whatever */);
             } else if (input.next().equals("m")) {
-                System.out.println("which pile would you like to take from");
+                System.out.println("which pile would you like to take from? (1-7) ");
                 int grabbed = input.nextInt();
-                System.out.println("where do you want to put it");
+                System.out.println("where do you want to put it? (1-7) ");
                 /* check it and place it there */
             } else {
-                System.out.println("invalid command try harder");
+                System.out.println("Invalid command, try again");
             }
         }
       
