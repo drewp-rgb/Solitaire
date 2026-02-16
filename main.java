@@ -296,6 +296,7 @@
                             {
                                 board.get(wasteplace).add(wasteCard);
                                 Waste.remove(Waste.size()-1);
+                                board.get(wasteplace).get(board.get(wasteplace).size()-1).showcard();
                                 
                             }
                             else
